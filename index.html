@@ -1,0 +1,24 @@
+<!DOCTYPE HTML><HTML>
+<HEAD>
+      <TITLE>Jedmatex</TITLE> <!--meta http-equiv="refresh" content="2" -->
+      <link rel="stylesheet" href="style.css">
+</HEAD>
+<BODY>
+   <h2>Jedmatex</h2>
+   <div>
+      <button id="opdo" onmousedown="event.preventDefault();" onclick="new o_opdo($main_ex, true)" >Operando</button>
+      <button id="pow"  onmousedown="event.preventDefault();" onclick="new o_pow()">Potencia</button>
+      <button id="sub"  onmousedown="event.preventDefault();" onclick="new o_pow('',true)">Subíndice</button>
+      <button id="frac" onmousedown="event.preventDefault();" onclick="new o_frac()">Fracción</button>
+      <button id="sqrt" onmousedown="event.preventDefault();" onclick="new o_sqrt()">Raiz</button>
+   </div>
+   <br>
+   <div class="matfor"></div>
+   </div>
+   <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+   <script src="jedmatex.js"></script>
+   <script>
+      set_matex_node('.matfor');
+   </script>
+</BODY>
+</HTML>

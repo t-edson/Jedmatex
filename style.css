@@ -1,0 +1,42 @@
+/* Envoltura principal que representa a una fórmula*/
+.matfor {
+    padding: 0.3rem;
+    border: 1px solid blue;
+    display: block;
+    width: 500px;
+}
+/* Envoltura que se ubica siempre dentro de matfor.
+Funciones: 
+ - Ubicar horizontalmente los elementos uno a uno.
+ - Centrar verticalmente el contenido. */
+.wrap {
+    /*border: 2px solid yellow;*/
+    display: table-cell;
+    vertical-align: middle;    
+    /*font-family: Cambria, serif;*/
+}
+/*.wrap.opdo {
+    border: 2px solid #d90;
+    padding: 2px;
+}
+.wrap.opdr {
+    border: 2px solid cyan;
+    padding: 2px;
+}
+/*
+.wrap.pow .frame .field{
+    position: relative;
+    top: -0.4rem;
+}*/
+/* Clase que a veces se ubica dentro de wrap, y que sirve
+para facilitar la ubicación del campo field */
+.frame {
+    border: 1px solid red;
+}
+
+.field {
+    border: 1px dashed gray ;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+

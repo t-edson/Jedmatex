@@ -4,48 +4,29 @@ Javacsript library to create WYSIWYG equation editor in HTML.
 
 This library makes it possible to edit equations directly on an HTML page.
 
+![sample page](https://github.com/t-edson/Jedmatex/blob/0.4/screen1.png?raw=true)
 
 
 # Installation
 
-No special installation is required. The code of the library just includes:
-
-- A PHP file: phcontrols.php
-- A SCSS file: phcontrols.scss
-
-SASS is used to create the Style sheet, but a common CSS file is included too.
-
-To use the PHP library, just copy the files in an accesible path and includes the following code in a PHP file:
+No special installation is required, just download the file "jedmatex.js" and include the reference in the HTML code. Jquery is required, so it must be included too.:
 
 ```
-<?php
-include 'phcontrols.php';
-...
-
-?>
+   <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+   <script src="jedmatex.js"></script>
 ```
 
 
+## Use
 
-## Sample Code
+The library converts a simple <<div>> to a equation editor.
 
-Hello World page can be created in a file index.php with the following code:
+To set a <<div>>, we use the function set_matex_node():
 
 ```
-<head>
-	<link rel="stylesheet" href="phcontrols.css">
-</head>
-<body>
-	<?php
-	include 'phcontrols.php';
-	startBlock('My Block');
-	echo 'Hello world';
-	endBlock();
-	?>	
-</body>
+   <div class="matequ"></div>
+   </div>
+   <script>
+      set_matex_node('.matequ');
+   </script>
 ```
-
-The output would be:
-
-![sample page](https://github.com/t-edson/phcontrols/blob/0.2/_screens/sample1.png?raw=true)
-

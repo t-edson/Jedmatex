@@ -21,7 +21,7 @@ No special installation is required, just download the file "jedmatex.js" and in
 
 The library converts a simple \<div\> to a equation editor.
 
-To set a <div>, we use the function set_matex_node():
+To set a \<div\>, we use the function set_matex_node():
 
 ```
    <div class="matequ"></div>

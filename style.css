@@ -1,10 +1,10 @@
 /* Envoltura principal que representa a una fórmula*/
-.matfor {
+/*.matfor {
     padding: 0.3rem;
     border: 1px solid blue;
     display: block;
     width: 500px;
-}
+}*/
 /* Envoltura que se ubica siempre dentro de matfor.
 Funciones: 
  - Ubicar horizontalmente los elementos uno a uno.
@@ -31,11 +31,11 @@ Funciones:
 /* Clase que a veces se ubica dentro de wrap, y que sirve
 para facilitar la ubicación del campo field */
 .frame {
-    border: 1px solid red;
+/*    border: 1px solid red;*/
 }
 
 .field {
-    border: 1px dashed gray ;
+    /*border: 1px dashed gray ;*/
     padding-left: 1px;
     padding-right: 1px;
 }

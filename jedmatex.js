@@ -571,7 +571,7 @@ function o_pow(init_val='', sub=false) {  //Operador "potencia"
       } else if ($w_prev.hasClass('opdo')) {  //Es lo que esperamos
          var prevfontsize = o_prev.lastFontSize();  //En pixels
       } else {
-         //Porbablemente hay un operador antes.
+         //Probablemente hay un operador antes.
          $w_prev = $w_prev.prev();  //Busca al otro anterior
          o_prev  = $w_prev.length>0?$w_prev.get(0).obj:null;
          if (o_prev==null) {  //No hay wrap anterior.
@@ -582,33 +582,38 @@ function o_pow(init_val='', sub=false) {  //Operador "potencia"
             var prevfontsize = this.$w.css('font-size');  //Tomamos nuestra medida
          }
       }
-      //Calcula el nuevo tamaño para el exponente o subíndice.
-      var fontsize = parseFloat(prevfontsize)*0.8;
-      //Configura tamaño de acuerdo al tamaño anterior
+      //Fija tamaño del texto para el exponente o subíndice.
+      var fontsize = parseFloat(prevfontsize)*0.7;
       setFontSize(this.$w, fontsize);  //Se fija el tamaño en el wrap para que todo el contenido nuevo, herede ese tamaño.
-      this.$fra.css("height: ", prevfontsize);   //Tamaño del frame. Sería mejor incluir "style=.." en el DOM para que pueda guardarse.
+      var exp_height = this.$op1.css("height");
+      //var fra_height = parseFloat(prevfontsize)*1;
+      var fra_height = parseFloat(exp_height)*2;
+      //Configura tamaño de acuerdo al tamaño anterior
+      this.$fra.css("height", fra_height);   //Tamaño del frame.
       if (sub) {  //Subíndice
-         this.$op1.css("top", fontsize*0.6);   //Por debajo del frame
+         //this.$op1.css("top", fontsize*0.6);   //Por debajo del frame
+         this.$op1.css("bottom", "0");   //Por debajo del frame
       } else {  //Exponente
-         this.$op1.css("top", -fontsize*0.5);   //Por encima del top del frame
+         //this.$op1.css("top", -fontsize*0.5);   //Por encima del top del frame
+         this.$op1.css("top", "0");   //Por encima del top del frame
       }
       //console.log('Letra='+fontsize);
    }
    //Agrega este operador en la posición actual.
    var h_opdr='<div class="wrap opdr pow" >'+
-   '<div class="frame" id=exp >'+
+   '<div class="frame">'+
    '</div></div>';
    if (!update_state()) return;  //Lee wraps.
    var $wrp = add_opdr(h_opdr, $w_par, $w_cur, cur_beg, cur_end, w_pos);
    if ($wrp==null) return;  //Algo salió mal. No se terminó de crear el objeto.
+   this.$fra = $wrp.find('.frame');  //Actualiza referencia al frame
    //Crea único operando
-   this.op1 = new o_opdo($wrp.find('.frame'), true, 
-      "position: relative; ");  //El valor -0.5rem debería tambier dimensionarse en resize().
+   this.op1 = new o_opdo(this.$fra, true, 
+      "position: relative; ");
    this.$op1 = this.op1.$w;
    if (init_val!='') {setTextWrap(this.$op1, init_val);}
    //Guarda las referencias
    this.$w = $wrp;  //Al wrap
-   this.$fra = $wrp.find('.frame');
    $wrp.get(0).obj = this;   //Fija referencia a este objeto en el mismo elemento DOM, creando el campo "obj".
    var $par = $wrp.parent(); //Se necesita al operando contenedor para validar.
    this.resize();
@@ -714,6 +719,7 @@ function o_sqrt(init_val='') {  //Operador "raiz"
    this.op2 = null;  //Referencia al Operando2 de este operador (argumento)
    this.$op1 = null; //Referencia al wrap Operando1 de este operador
    this.$op2 = null; //Referencia al wrap Operando2 de este operador
+   this.$fra = null;  //Frame de soporte
    this.recv_cursor_right = function() { //Recibe el cursor por la derecha
       this.op2.recv_cursor_right();
    }
@@ -776,7 +782,14 @@ function o_sqrt(init_val='') {  //Operador "raiz"
       return false;     //No porcesó el evento
    }
    this.resize=function() {  //Configura su tamaño 
-
+      //Calcula el nuevo tamaño para el exponente o subíndice.
+      var prevfontsize = this.$w.css('font-size');  //Por ahora tomamos la medida del wrap
+      var fontsize = parseFloat(prevfontsize)*0.8;  //Tamaño para el radical
+      //Configura tamaño de radical
+      setFontSize(this.$op1, fontsize); 
+      this.$fra.css("height: ", prevfontsize);   //Tamaño del frame.
+      this.$op1.css("top", -fontsize*0.5);   //Por encima del top del frame
+      this.$op1.css("left", "3px");   //Por encima del top del frame
    }
    //Calcula altura del contenedor y tamaño de exponente.
    var hf=1.8;
@@ -787,10 +800,30 @@ function o_sqrt(init_val='') {  //Operador "raiz"
    if (!update_state()) return;  //Lee wraps.
    var $wrp = add_opdr(h_opdr, $w_par, $w_cur, cur_beg, cur_end, w_pos);
    if ($wrp==null) return;  //Algo salió mal. No se terminar de crear el objeto.
-   //Crea operandos
-   this.op1 = new o_opdo($wrp.find('.frame'), true, "display:block; border-bottom:1px solid black; text-align:center;");
+   this.$fra = $wrp.find('.frame');
+   //Crea operando radical
+   this.op1 = new o_opdo(this.$fra, true, "position: relative; ");
    this.$op1 = this.op1.$w;
-   this.op2 = new o_opdo($wrp.find('.frame'), false,"display:block; border-top:1px solid black; text-align:center;");
+   //Bloque para dibujar el símbolo de raiz.
+   //var sty1 = "width:5px;position:absolute; top:0px; left:0px; border:2px solid blue;"; 
+   //var sty1 = "width:5px;border:1px solid black; background: "+
+   //"linear-gradient(to top left,rgba(0,0,0,0) 0%,rgba(0,0,0,0) calc(50% - 0.8px),"+
+   //"rgba(0,0,0,1) 50%,rgba(0,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100%)";
+   //this.$fra.append('<div class="wrap" style="'+sty1+'">'+'</div>');
+
+   var sty = "width:6px; position: relative; background: "+  //Diagonal larga "/"
+   "linear-gradient(to top left,rgba(0,0,0,0) 0%,rgba(0,0,0,0) calc(50% - 0.8px),"+
+   "rgba(0,0,0,1) 50%,rgba(0,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 100%)";
+   var sty1 = "width:5px; height:7px; position:absolute;"+  //Diagonal corta "\"
+   "bottom:0px;left:-5px;" + 
+   "background: linear-gradient(to top right,rgba(0,0,0,0) 0%,rgba(0,0,0,0) calc(50% - 0.8px),"+
+   "rgba(0,0,0,1) 50%,rgba(0,0,0,0) calc(50% + 0.8px),rgba(0,0,0,0) 60%);"; 
+   this.$fra.append('<div class="wrap" style="'+sty+'">'+
+   '<div style="'+sty1+'"></div>'+ '</div>');
+
+   var $wrp_root = this.$fra.children().last();
+   //Crea operando 
+   this.op2 = new o_opdo(this.$fra, false,"border-top:1px solid black; ");
    this.$op2 = this.op2.$w;
 
    if (init_val!='') {setTextWrap(this.$op1, init_val);}

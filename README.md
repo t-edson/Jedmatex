@@ -4,7 +4,7 @@ Javacsript library to create WYSIWYG equation editor in HTML.
 
 This library makes it possible to edit equations directly on an HTML page.
 
-![sample page](https://github.com/t-edson/Jedmatex/blob/0.4/screen1.png?raw=true)
+![sample page](https://github.com/t-edson/Jedmatex/blob/0.4/screens/screen1.png?raw=true)
 
 
 # Installation
@@ -51,12 +51,16 @@ Special math operations are those that require special editing options.
 Only the following operations have been implemented:
 
 * power
+![sample page](https://github.com/t-edson/Jedmatex/blob/0.4/screens/power.png?raw=true)
 
 * fraction 
+![sample page](https://github.com/t-edson/Jedmatex/blob/0.4/screens/fraction.png?raw=true)
 
 * square root
+![sample page](https://github.com/t-edson/Jedmatex/blob/0.4/screens/square.png?raw=true)
 
 * index
+![sample page](https://github.com/t-edson/Jedmatex/blob/0.4/screens/index.png?raw=true)
 
 
 

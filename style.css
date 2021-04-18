@@ -23,19 +23,14 @@ Funciones:
     border: 2px solid cyan;
     padding: 1px;
 }
-/*
-.wrap.pow .frame .field{
-    position: relative;
-    top: -0.4rem;
-}*/
 /* Clase que a veces se ubica dentro de wrap, y que sirve
 para facilitar la ubicación del campo field */
 .frame {
-/*    border: 1px solid red;*/
+    border: 1px solid red;
 }
 
 .field {
-    /*border: 1px dashed gray ;*/
+    border: 1px dashed gray ;
     padding-left: 1px;
     padding-right: 1px;
 }

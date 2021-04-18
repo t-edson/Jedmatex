@@ -16,7 +16,6 @@ No special installation is required, just download the file "jedmatex.js" and in
    <script src="jedmatex.js"></script>
 ```
 
-
 ## Use
 
 The library converts a simple \<div\> to a equation editor.
@@ -30,3 +29,31 @@ To set a \<div\>, we use the function set_matex_node():
       set_matex_node('.matequ');
    </script>
 ```
+
+After that we must add the first operand to start the edition:
+
+```
+  <script>
+	new o_opdo($main_ex, true)
+  </script>
+```
+
+Then we can start writing the equation.
+
+Operators such as addition or subtraction are written directly.
+
+Operations like power or square root needs to be created using some functions of the library for special operations.
+
+## Special operations
+
+Special math operations are those that require special editing.
+
+Only the following operations have been implemented:
+
+power
+fraction 
+square root
+indice
+
+
+
